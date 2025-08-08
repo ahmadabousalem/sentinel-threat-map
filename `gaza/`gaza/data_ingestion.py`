@@ -1,0 +1,13 @@
+import feedparser
+import pandas as pd
+
+def get_gaza_events():
+    feed = feedparser.parse("https://acleddata.com/gaza-rss-feed/")
+    events = []
+    for entry in feed.entries:
+        events.append({
+            "date": entry.published,
+            "title": entry.title,
+            "location": "Gaza"
+        })
+    return pd.DataFrame(events)
